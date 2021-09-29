@@ -1,0 +1,18 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+/.idea/commandlinetools/*
+/.idea/commandlinetools/Composer_4_2_21__4_25_PM_c.xml
+/.idea/commandlinetools/Symfony_3_31_21__4_04_PM.xml

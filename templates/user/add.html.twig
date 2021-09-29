@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">New User Information</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="new-user-info">
+                            {{ form_start(form) }}
+                                <div class="row">
+                                    {% for child in form.children %}
+
+                                    <div class="form-group col-md-6">
+
+                                         {{ form_row(child,{"attr":{'class':'form-control'}}) }}
+
+                                    </div>
+                                    {% endfor %}
+
+
+                                </div>
+                                <hr>
+
+
+
+
+                                <button type="submit" class="btn btn-primary">Add New User</button>
+                                {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
