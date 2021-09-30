@@ -87,25 +87,32 @@ class UserController extends AbstractController
 
         //generate the form
         $form=$formBuilder->generateForm($user,$fields);
+
+
+        //error because role have type json
         $form->remove("roles");
+
+
+
         $form->handleRequest($request);
-
-
-        //error cause role have type json
 
 
 
         if($form->isSubmitted() && $form->isValid()){
+
+
             if($user->getId()==null|| $user->getId()==0){
                 $em->persist($user);
-
             }
+
             $em->flush();
+
             return $this->redirectToRoute("user-list");
 
         }
-        $view=$form->createView();
-        return $this->render("user/add.html.twig",array("form"=>$view));
+
+
+        return $this->render("user/add.html.twig",array("form"=>$form->createView()));
 
 
 
