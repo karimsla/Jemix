@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    {% form_theme form 'form_layout.html.twig' %}
+
 
 
     <div class="container-fluid">
@@ -16,26 +18,7 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="new-user-info">
-                            {{ form_start(form) }}
-                                <div class="row">
-                                    {% for child in form.children %}
-
-                                    <div class="form-group col-md-6">
-
-                                         {{ form_row(child,{"attr":{'class':'form-control'}}) }}
-
-                                    </div>
-                                    {% endfor %}
-
-
-                                </div>
-                                <hr>
-
-
-
-
-                                <button type="submit" class="btn btn-primary">Add New User</button>
-                                {{ form_end(form) }}
+                            {{form(form) }}
                         </div>
                     </div>
                 </div>

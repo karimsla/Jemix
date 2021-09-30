@@ -48,25 +48,26 @@ class UserController extends AbstractController
     public function addUser(Request $request,EntityManagerInterface $em,Form $formBuilder){
 
 
-        //if a field needs to be hashed then we have to check it so we can hash the password
+        $user=$em->getRepository(User::class)->find(2) ;
 
-        //get the namespace if the entity
-        $name="App\\Entity\\".$request->get("entity");
-        $user=new $name ;// instantiate the object
 
-        //get field using doctrine metadata
-        $metadata      = $em->getClassMetadata($name);
-        $entity_fields = $metadata->fieldMappings ;
 
 
 
         //manually will create the entity and the fields
-  /*      $fields=[
+        $fields=[
+            [
+                'field'=>'id',
+                'label'=>'This is id',
+                'type'=>'hidden',
+                'data'=>$user->getId(),
+
+            ],
             [
                 'field'=>'email',
                 'label'=>'This is email',
                 'type'=>'email',
-                'data'=>null,
+                'data'=>$user->getEmail(),
 
             ],
             [
@@ -76,35 +77,26 @@ class UserController extends AbstractController
                 'data'=>null,
             ]
 
-        ];*/
+        ];
 
 
-        $fields=[];
-
-       //for each entity field retrived from the metadata creat an array and push it ti fields array
-        foreach ($entity_fields as $entity){
-            $field=[
-                "field"=>$entity['fieldName'],
-                'label'=>$entity['fieldName'],
-                'type'=>$entity['type']=='string'?'text':'collection',
-                'data'=> $this->accessProtected($user,$entity['fieldName']),
 
 
-            ];
-            array_push($fields,$field);
-        }
+
+
 
         //generate the form
         $form=$formBuilder->generateForm($user,$fields);
-
+        $form->remove("roles");
         $form->handleRequest($request);
 
 
         //error cause role have type json
-        $form->remove("roles");
+
+
 
         if($form->isSubmitted() && $form->isValid()){
-            if($user->getId()!=null|| $user->getId()==0){
+            if($user->getId()==null|| $user->getId()==0){
                 $em->persist($user);
 
             }
@@ -119,10 +111,6 @@ class UserController extends AbstractController
 
 
 
-
-    }
-
-    public function editUser(Request $request,EntityManagerInterface $em){
 
     }
 
